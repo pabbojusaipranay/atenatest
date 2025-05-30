@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-const ApiError = require('../util/createError');
+const ApiError = require('./errors');
 
 
 export const validatePage = (req: Request, res: Response, next: NextFunction) => {
