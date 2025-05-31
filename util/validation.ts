@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 const ApiError = require('./errors');
 
 
-export const validatePage = (req: Request, res: Response, next: NextFunction) => {
+export const pageValidator = (req: Request, res: Response, next: NextFunction) => {
   const { page } = req.query;
   if (page !== undefined) {
     const pageStr = String(page);
@@ -19,7 +19,7 @@ export const validatePage = (req: Request, res: Response, next: NextFunction) =>
 };
 
 
-export const validateYear = (req: Request, res: Response, next: NextFunction) => {
+export const yearValidator = (req: Request, res: Response, next: NextFunction) => {
   const { year } = req.params;
   const yearRegex = /^\d{4}$/;
   const currentYear = new Date().getFullYear();
@@ -33,7 +33,7 @@ export const validateYear = (req: Request, res: Response, next: NextFunction) =>
 };
 
 
-export const validateGenre = (req: Request, res: Response, next: NextFunction) => {
+export const genreValidator = (req: Request, res: Response, next: NextFunction) => {
   const { genre } = req.params;
   if (!genre || typeof genre !== 'string' || !/^[a-zA-Z\s]+$/.test(genre)) {
     return next(new ApiError(400, 'Genre param invalid', {
@@ -45,7 +45,7 @@ export const validateGenre = (req: Request, res: Response, next: NextFunction) =
 };
 
 
-export const validateMovieId = (req: Request, res: Response, next: NextFunction) => {
+export const movieIdValidator = (req: Request, res: Response, next: NextFunction) => {
   const { id } = req.params;
   const idRegex = /^[A-Za-z0-9_-]+$/;
   if (!id || typeof id !== 'string' || !idRegex.test(id)) {
@@ -58,7 +58,7 @@ export const validateMovieId = (req: Request, res: Response, next: NextFunction)
 };
 
 
-export const validateOrder = (req: Request, res: Response, next: NextFunction) => {
+export const orderValidator = (req: Request, res: Response, next: NextFunction) => {
   const { order } = req.query;
   if (order !== undefined) {
     const orderStr = String(order).toLowerCase();

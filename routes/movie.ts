@@ -1,13 +1,30 @@
 import express from 'express';
 import {
-  validatePage
+  pageValidator, yearValidator, orderValidator, genreValidator, movieIdValidator
 } from '../util/validation';
 const router = express.Router();
 const moviesController = require('../controller/movieController');
 
 
-router.get('/', validatePage, moviesController.listAllMovies);
+router.get('/', pageValidator, moviesController.listAllMovies);
 
+router.get(
+    '/year/:year',
+    yearValidator,
+    orderValidator,
+    pageValidator,
+    moviesController.moviesByYear
+  );
+  
 
+  router.get(
+    '/genre/:genre',
+    genreValidator,
+    pageValidator,
+    moviesController.moviesByGenre
+  );
+  
 
-module.exports = router;
+  router.get('/:id', movieIdValidator, moviesController.movieDetails);
+  
+  module.exports = router;
